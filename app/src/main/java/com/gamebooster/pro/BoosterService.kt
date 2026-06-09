@@ -79,7 +79,7 @@ class BoosterService : VpnService() {
             
             // Add custom local IP addresses for safe routing simulation
             builder.addAddress("10.0.0.2", 24)
-            builder.addRoute("0.0.0.0", 0)
+            builder.addRoute("10.0.0.0", 24)
 
             // CRITICAL REQUIREMENT: Split-tunnel configuration for specific game app targets
             val targetApp = selectedPackage ?: "com.activision.callofduty.shooter"
