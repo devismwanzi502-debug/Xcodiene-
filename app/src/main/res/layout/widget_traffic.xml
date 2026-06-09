@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:drawable/dialog_holo_dark_frame"
+    android:padding="16dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRAFFIC OVERWATCH"
+        android:textColor="#1A73E8"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.05" />
+
+    <TextView
+        android:id="@+id/tvWidgetTraffic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 PKTS"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginTop="4dp" />
+</LinearLayout>

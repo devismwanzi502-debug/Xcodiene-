@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Outer Shield Profile -->
+    <path
+        android:pathData="M 54,22 L 82,32 C 82,62 54,84 54,84 C 54,84 26,62 26,32 Z"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFFFF">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="26"
+                android:startY="32"
+                android:endX="82"
+                android:endY="84">
+                <item android:color="#1A73E8" android:offset="0.0" />
+                <item android:color="#0052CC" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Shield Division Line & Inner Contrast -->
+    <path
+        android:pathData="M 54,22 L 54,84 C 54,84 26,62 26,32 Z"
+        android:fillColor="#1565C0" />
+
+    <!-- Speed Bolt Motif representing game speed optimization -->
+    <path
+        android:pathData="M54,34 L42,50 L52,50 L48,68 L64,48 L54,48 Z"
+        android:fillColor="#FFFFFF" />
+
+</vector>
