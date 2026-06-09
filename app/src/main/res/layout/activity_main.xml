@@ -80,326 +80,773 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <!-- Drop-Down Profile Selector -->
+        <!-- Monitor Tab Container -->
         <LinearLayout
+            android:id="@+id/layoutMonitorTab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/card_bg"
-            android:padding="14dp"
-            android:layout_marginBottom="12dp">
+            android:visibility="visible">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="OPTIMIZATION SPECIFICATION PROFILE"
-                android:textColor="#888888"
-                android:textSize="9sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.05"
-                android:layout_marginBottom="6dp" />
-
-            <!-- Styled Spinner Selector -->
-            <Spinner
-                android:id="@+id/selectGameProfile"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:spinnerMode="dropdown" />
-        </LinearLayout>
-
-        <!-- Primary Latency Spectrum Dashboard Section -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card_bg"
-            android:padding="16dp"
-            android:layout_marginBottom="12dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="LATENCY SPECTRUM"
-                android:textColor="#1A73E8"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.05"
-                android:layout_marginBottom="4dp" />
-
+            <!-- Drop-Down Profile Selector -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="bottom">
-
-                <TextView
-                    android:id="@+id/textPing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="#FFFFFF"
-                    android:textSize="56sp"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-black"
-                    android:includeFontPadding="false" />
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="14dp"
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" ms"
-                    android:textColor="#1A73E8"
-                    android:textSize="18sp"
+                    android:text="OPTIMIZATION SPECIFICATION PROFILE"
+                    android:textColor="#888888"
+                    android:textSize="9sp"
                     android:textStyle="bold"
-                    android:layout_marginLeft="4dp"
+                    android:letterSpacing="0.05"
                     android:layout_marginBottom="6dp" />
+
+                <!-- Styled Spinner Selector -->
+                <Spinner
+                    android:id="@+id/selectGameProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#FFFFFF"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
-            <!-- Dynamic Indicator Progress Bar -->
+            <!-- Drop-Down Virtual Location Geo-Selector -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="#2E3033"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-                
-                <View
-                    android:id="@+id/viewPingProgressBar"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:background="#1A73E8" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Telemetry Grid -->
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:rowCount="2"
-            android:alignmentMode="alignBounds"
-            android:layout_marginBottom="12dp">
-
-            <!-- Card: Jitter -->
-            <LinearLayout
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
                 android:orientation="vertical"
                 android:background="@drawable/card_bg"
-                android:padding="12dp"
-                android:layout_margin="3dp">
+                android:padding="14dp"
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="JITTER"
+                    android:text="VIRTUAL GEOGRAPHIC LOCATION &amp; DNS BYPASS"
                     android:textColor="#888888"
                     android:textSize="9sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textJitter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1.2 ms"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="4dp" />
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="6dp" />
+
+                <!-- Styled Virtual Location Spinner -->
+                <Spinner
+                    android:id="@+id/selectVirtualLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#FFFFFF"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
-            <!-- Card: Packet Loss -->
+            <!-- Primary Latency Spectrum Dashboard Section -->
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
                 android:orientation="vertical"
                 android:background="@drawable/card_bg"
-                android:padding="12dp"
-                android:layout_margin="3dp">
+                android:padding="16dp"
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PACKET LOSS"
-                    android:textColor="#888888"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textPacketLoss"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0.00 %"
+                    android:text="LATENCY SPECTRUM"
                     android:textColor="#1A73E8"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-
-            <!-- Card: Optimized Bandwidth Flow / Downstream -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:orientation="vertical"
-                android:background="@drawable/card_bg"
-                android:padding="12dp"
-                android:layout_margin="3dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="OPTIMIZED FLOW"
-                    android:textColor="#888888"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textTraffic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0 PKTS/S"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-
-            <!-- Card: Upstream Simulated Speed -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:orientation="vertical"
-                android:background="@drawable/card_bg"
-                android:padding="12dp"
-                android:layout_margin="3dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FLOW INTENSITY"
-                    android:textColor="#888888"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textIntensity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="STANDBY"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-        </GridLayout>
-
-        <!-- Dynamic Game Profile Integration View -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="16dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:layout_marginLeft="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SELECTED DEEP TUNNEL INTEGRATION"
-                    android:textColor="#888888"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textTunnelStateBadge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="READY TO BIND"
-                    android:textColor="#1A73E8"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <!-- Dynamic selected profile placeholder -->
-            <RelativeLayout
-                android:id="@+id/layoutSelectedGameCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/card_bg"
-                android:padding="12dp">
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="4dp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical">
-                    
+                    android:gravity="bottom">
+
                     <TextView
-                        android:id="@+id/textGameLogo"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:text="COD"
+                        android:id="@+id/textPing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
                         android:textColor="#FFFFFF"
-                        android:background="#1565C0"
-                        android:gravity="center"
-                        android:textSize="10sp"
+                        android:textSize="56sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-black"
+                        android:includeFontPadding="false" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" ms"
+                        android:textColor="#1A73E8"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginBottom="6dp" />
+                </LinearLayout>
+
+                <!-- Dynamic Indicator Progress Bar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#2E3033"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/viewPingProgressBar"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:background="#1A73E8" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Telemetry Grid -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:alignmentMode="alignBounds"
+                android:layout_marginBottom="12dp">
+
+                <!-- Card: Jitter -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="12dp"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="JITTER"
+                        android:textColor="#888888"
+                        android:textSize="9sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textGameTitle"
+                        android:id="@+id/textJitter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Call of Duty: Mobile"
+                        android:text="1.2 ms"
                         android:textColor="#FFFFFF"
-                        android:textSize="13sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="12dp" />
+                        android:layout_marginTop="4dp" />
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/viewSelectedGameStatusPill"
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="#888888" />
-            </RelativeLayout>
+                <!-- Card: Packet Loss -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="12dp"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PACKET LOSS"
+                        android:textColor="#888888"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textPacketLoss"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00 %"
+                        android:textColor="#1A73E8"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <!-- Card: Optimized Bandwidth Flow / Downstream -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="12dp"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="OPTIMIZED FLOW"
+                        android:textColor="#888888"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textTraffic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 PKTS/S"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <!-- Card: Upstream Simulated Speed -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="12dp"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FLOW INTENSITY"
+                        android:textColor="#888888"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textIntensity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="STANDBY"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </GridLayout>
+
+            <!-- Dynamic Game Profile Integration View -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SELECTED DEEP TUNNEL INTEGRATION"
+                        android:textColor="#888888"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textTunnelStateBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="READY TO BIND"
+                        android:textColor="#1A73E8"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <!-- Dynamic selected profile placeholder -->
+                <RelativeLayout
+                    android:id="@+id/layoutSelectedGameCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_bg"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textGameLogo"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:text="COD"
+                            android:textColor="#FFFFFF"
+                            android:background="#1565C0"
+                            android:gravity="center"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textGameTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Call of Duty: Mobile"
+                            android:textColor="#FFFFFF"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_marginLeft="12dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/viewSelectedGameStatusPill"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="#888888" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- Main Booster Toggle Action -->
+            <Button
+                android:id="@+id/btnToggleBooster"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="ENGAGE ENGINE"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_primary_bg"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Floating OSD Panel Action Button -->
+            <Button
+                android:id="@+id/btnToggleFloatingBubble"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="TOGGLE DRIFTING HUD CONTROL"
+                android:textColor="#1A73E8"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
         </LinearLayout>
 
-        <!-- Main Booster Toggle Action -->
-        <Button
-            android:id="@+id/btnToggleBooster"
+        <!-- Tunnels Tab Container (GONE by default) -->
+        <LinearLayout
+            android:id="@+id/layoutTunnelsTab"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:text="ENGAGE ENGINE"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_primary_bg"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp" />
-
-        <!-- Floating OSD Panel Action Button -->
-        <Button
-            android:id="@+id/btnToggleFloatingBubble"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="TOGGLE DRIFTING HUD CONTROL"
-            android:textColor="#1A73E8"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Title Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TUNNEL PROTOCOLS"
+                    android:textColor="#1A73E8"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select the core VPN routing architecture for packing game frames to minimize jitter."
+                    android:textColor="#888888"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="12dp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroupProtocols"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/radioWireGuard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="WireGuard Core Tunnel (UDP Speed)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:checked="true"
+                        android:buttonTint="#1A73E8"
+                        android:layout_marginBottom="4dp" />
+
+                    <RadioButton
+                        android:id="@+id/radioShadowsocks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Shadowsocks Obfuscator (UDP Multi-Route)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:buttonTint="#1A73E8"
+                        android:layout_marginBottom="4dp" />
+
+                    <RadioButton
+                        android:id="@+id/radioOpenVpn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="OpenVPN Gaming (UDP-Bypass Engine)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:buttonTint="#1A73E8" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <!-- Split-Tunnelling Management Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SPLIT-TUNNEL EXCLUSIONS"
+                    android:textColor="#1A73E8"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="6dp" />
+
+                <CheckBox
+                    android:id="@+id/checkCodSplit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Call of Duty: Mobile (Auto-Routed)"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:checked="true"
+                    android:buttonTint="#1A73E8"
+                    android:layout_marginBottom="4dp" />
+
+                <CheckBox
+                    android:id="@+id/checkPesSplit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="eFootball PES (Auto-Routed)"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:checked="true"
+                    android:buttonTint="#1A73E8"
+                    android:layout_marginBottom="4dp" />
+
+                <CheckBox
+                    android:id="@+id/checkPubgSplit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PUBG Mobile (Exclude Mode)"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:buttonTint="#1A73E8" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Network Tab Container (GONE by default) -->
+        <LinearLayout
+            android:id="@+id/layoutNetworkTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Active Endpoint Diagnostics -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ENDPOINT DIAGNOSTICS"
+                    android:textColor="#1A73E8"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="10dp" />
+
+                <!-- Detail Row 1 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Local Connection"
+                        android:textColor="#888888"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/textNetLocalConn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="wlan0 (WiFi Direct)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <!-- Detail Row 2 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tunnel IP Address"
+                        android:textColor="#888888"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/textNetTunnelIp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="10.0.0.5"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <!-- Detail Row 3 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Active Regional DNS"
+                        android:textColor="#888888"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/textNetActiveDns"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="165.21.83.88"
+                        android:textColor="#1A73E8"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <!-- Detail Row 4 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="System Link Cap"
+                        android:textColor="#888888"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="1200 Mbps Full-Duplex"
+                        android:textColor="#007A33"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- Traceroute Emulator Box -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SIGNAL ICMP TRACEROUTE CONSOLE"
+                    android:textColor="#1A73E8"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="6dp" />
+
+                <Button
+                    android:id="@+id/btnRunDiagnostics"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:text="RUN ROUTE LATENCY SCAN"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/button_primary_bg"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp" />
+
+                <!-- Scrollable Console View -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="#090A0C"
+                    android:padding="8dp">
+                    
+                    <ScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        
+                        <TextView
+                            android:id="@+id/textDiagnosticsConsole"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="========================================\nCore diagnostic node standby.\nClick SIGNALS TRACE to test local path routes...\n========================================\n"
+                            android:textColor="#00FF66"
+                            android:textSize="10sp"
+                            android:fontFamily="monospace" />
+                    </ScrollView>
+                </HorizontalScrollView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Settings Tab Container (GONE by default) -->
+        <LinearLayout
+            android:id="@+id/layoutSettingsTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- System Optimizations list -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SYSTEM SPEED CUSTOMIZATIONS"
+                    android:textColor="#1A73E8"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="10dp" />
+
+                <CheckBox
+                    android:id="@+id/switchAutoStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Auto-Optimize on Selected Game Launch"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:checked="true"
+                    android:buttonTint="#1A73E8"
+                    android:layout_marginBottom="6dp" />
+
+                <CheckBox
+                    android:id="@+id/switchPacketAcceleration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enable Hardware Packet Acceleration"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:checked="true"
+                    android:buttonTint="#1A73E8"
+                    android:layout_marginBottom="6dp" />
+
+                <CheckBox
+                    android:id="@+id/switchIpv6Bypass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Force IPv6 Dual-Stack Tunnel Bypass"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:buttonTint="#1A73E8" />
+            </LinearLayout>
+
+            <!-- Spinner config parameters -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MONITOR REFRESH FREQUENCY"
+                    android:textColor="#888888"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerRefreshRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#FFFFFF"
+                    android:spinnerMode="dropdown"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DYNAMIC TUNNEL MTU LIMIT"
+                    android:textColor="#888888"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerMtuLimit"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#FFFFFF"
+                    android:spinnerMode="dropdown"
+                    android:layout_marginBottom="14dp" />
+
+                <Button
+                    android:id="@+id/btnSaveSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:text="APPLY ENGINE CONFIGURATION"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/button_primary_bg"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
 
         <!-- High Density Custom Bottom Navigation Layout -->
         <LinearLayout
@@ -411,19 +858,24 @@
 
             <!-- Tab: Monitor -->
             <LinearLayout
+                android:id="@+id/tabMonitor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center">
 
                 <View
+                    android:id="@+id/viewTabMonitorIndicator"
                     android:layout_width="12dp"
                     android:layout_height="2dp"
                     android:background="#1A73E8"
                     android:layout_marginBottom="4dp" />
 
                 <TextView
+                    android:id="@+id/textTabMonitor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="MONITOR"
@@ -434,14 +886,26 @@
 
             <!-- Tab: Tunnels -->
             <LinearLayout
+                android:id="@+id/tabTunnels"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
                 android:alpha="0.4">
 
+                <View
+                    android:id="@+id/viewTabTunnelsIndicator"
+                    android:layout_width="12dp"
+                    android:layout_height="2dp"
+                    android:background="#1A73E8"
+                    android:visibility="invisible"
+                    android:layout_marginBottom="4dp" />
+
                 <TextView
+                    android:id="@+id/textTabTunnels"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TUNNELS"
@@ -452,14 +916,26 @@
 
             <!-- Tab: Network -->
             <LinearLayout
+                android:id="@+id/tabNetwork"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
                 android:alpha="0.4">
 
+                <View
+                    android:id="@+id/viewTabNetworkIndicator"
+                    android:layout_width="12dp"
+                    android:layout_height="2dp"
+                    android:background="#1A73E8"
+                    android:visibility="invisible"
+                    android:layout_marginBottom="4dp" />
+
                 <TextView
+                    android:id="@+id/textTabNetwork"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NETWORK"
@@ -470,14 +946,26 @@
 
             <!-- Tab: Settings -->
             <LinearLayout
+                android:id="@+id/tabSettings"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
                 android:alpha="0.4">
 
+                <View
+                    android:id="@+id/viewTabSettingsIndicator"
+                    android:layout_width="12dp"
+                    android:layout_height="2dp"
+                    android:background="#1A73E8"
+                    android:visibility="invisible"
+                    android:layout_marginBottom="4dp" />
+
                 <TextView
+                    android:id="@+id/textTabSettings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SETTINGS"

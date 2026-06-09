@@ -29,6 +29,7 @@ class FloatingBubbleService : Service() {
     private var panelLayout: LinearLayout? = null
     
     private var tvPanelPing: TextView? = null
+    private var tvPanelLocation: TextView? = null
     private var btnPanelToggle: Button? = null
     private var statusPill: View? = null
 
@@ -43,9 +44,12 @@ class FloatingBubbleService : Service() {
             if (intent.action == BoosterService.BROADCAST_TELEMETRY) {
                 val ping = intent.getIntExtra(BoosterService.EXTRA_PING, 0)
                 val active = intent.getBooleanExtra(BoosterService.EXTRA_ACTIVE, false)
+                val country = intent.getStringExtra(BoosterService.EXTRA_COUNTRY) ?: ""
+                val flag = intent.getStringExtra(BoosterService.EXTRA_FLAG) ?: ""
                 isBoosterActive = active
                 
                 tvPanelPing?.text = if (active) "PING: $ping ms" else "PING: STANDBY"
+                tvPanelLocation?.text = if (active && country.isNotEmpty()) "V-LOC: $flag $country" else "LOC: STANDBY"
                 btnPanelToggle?.text = if (active) "SUSPEND" else "ENGAGE"
                 btnPanelToggle?.setBackgroundColor(if (active) Color.parseColor("#E53935") else Color.parseColor("#1A73E8"))
                 statusPill?.setBackgroundColor(if (active) Color.parseColor("#007A33") else Color.parseColor("#E53935"))
@@ -129,9 +133,18 @@ class FloatingBubbleService : Service() {
             setTextColor(Color.WHITE)
             textSize = 12f
             typeface = Typeface.MONOSPACE
-            setPadding(0, dpToPx(6), 0, dpToPx(8))
+            setPadding(0, dpToPx(6), 0, dpToPx(4))
         }
         tvPanelPing = pingTv
+
+        val locationTv = TextView(this).apply {
+            text = "LOC: STANDBY"
+            setTextColor(Color.parseColor("#888888"))
+            textSize = 9f
+            typeface = Typeface.MONOSPACE
+            setPadding(0, 0, 0, dpToPx(8))
+        }
+        tvPanelLocation = locationTv
 
         val toggleBtn = Button(this).apply {
             text = "ENGAGE"
@@ -153,6 +166,7 @@ class FloatingBubbleService : Service() {
 
         panel.addView(headerRow)
         panel.addView(pingTv)
+        panel.addView(locationTv)
         panel.addView(toggleBtn)
         panelLayout = panel
 
