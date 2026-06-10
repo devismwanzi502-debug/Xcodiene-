@@ -121,7 +121,15 @@ class BoosterService : VpnService() {
         activeGeoNode = geoNode ?: "sg-optimal.gamebooster.pro"
 
         try {
-            startForeground(NOTIFICATION_ID, buildNotification(true))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                startForeground(
+                    NOTIFICATION_ID,
+                    buildNotification(true),
+                    android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
+                )
+            } else {
+                startForeground(NOTIFICATION_ID, buildNotification(true))
+            }
         } catch (e: Exception) {
             Log.e(TAG, "Foreground service start not allowed by system or missing POST_NOTIFICATIONS runtime permission in current context. Stopping service.", e)
             isRunning = false

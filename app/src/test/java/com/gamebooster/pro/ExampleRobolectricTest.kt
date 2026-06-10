@@ -26,6 +26,8 @@ class ExampleRobolectricTest {
         ActivityScenario.launch(MainActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
                 assertNotNull(activity)
+                val textHeader = activity.findViewById<android.widget.TextView>(R.id.textHeader)
+                assertNotNull("Main layout was not inflated successfully! It fell back to the graceful crash screen.", textHeader)
             }
         }
     }
