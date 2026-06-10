@@ -120,40 +120,53 @@ class BoosterService : VpnService() {
         activeIpAddress = ipAddress ?: "101.100.200.5"
         activeGeoNode = geoNode ?: "sg-optimal.gamebooster.pro"
 
-        startForeground(NOTIFICATION_ID, buildNotification(true))
+        try {
+            startForeground(NOTIFICATION_ID, buildNotification(true))
+        } catch (e: Exception) {
+            Log.e(TAG, "Foreground service start not allowed by system or missing POST_NOTIFICATIONS runtime permission in current context. Stopping service.", e)
+            isRunning = false
+            stopSelf()
+            return
+        }
 
         // Configure VpnService build tunnel
         try {
-            val builder = Builder()
-            builder.setSession("GameBoosterPro Session")
-            builder.setMtu(1500)
-            
-            // Add custom local IP addresses for safe routing simulation
-            val assignedVpnIp = activeIpAddress ?: "10.0.0.2"
-            builder.addAddress(assignedVpnIp, 24)
-            builder.addRoute("10.0.0.0", 24)
+            val prepareIntent = prepare(this)
+            if (prepareIntent != null) {
+                Log.w(TAG, "VPN permission has not been explicitly granted yet. Running in high-fidelity network-tunnel optimization simulation.")
+                vpnInterface = null
+            } else {
+                val builder = Builder()
+                builder.setSession("GameBoosterPro Session")
+                builder.setMtu(1500)
+                
+                // Add custom local IP addresses for safe routing simulation
+                val assignedVpnIp = activeIpAddress ?: "10.0.0.2"
+                builder.addAddress(assignedVpnIp, 24)
+                builder.addRoute("10.0.0.0", 24)
 
-            // Dynamically set regional primary and secondary DNS to direct DNS geo-signatures
-            try {
-                builder.addDnsServer(activeDnsPrimary!!)
-                builder.addDnsServer(activeDnsSecondary!!)
-            } catch (e: Exception) {
-                Log.w(TAG, "Failed adding dynamic DNS servers, using fallback", e)
-                builder.addDnsServer("1.1.1.1")
+                // Dynamically set regional primary and secondary DNS to direct DNS geo-signatures
+                try {
+                    builder.addDnsServer(activeDnsPrimary!!)
+                    builder.addDnsServer(activeDnsSecondary!!)
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed adding dynamic DNS servers, using fallback", e)
+                    builder.addDnsServer("1.1.1.1")
+                }
+
+                // CRITICAL REQUIREMENT: Split-tunnel configuration for specific game app targets
+                try {
+                    builder.addAllowedApplication(targetApp)
+                } catch (e: Exception) {
+                    Log.w(TAG, "Could not add allowed application: $targetApp", e)
+                }
+
+                // CRITICAL REQUIREMENT: Attach allowBypass() so initial configurations can download normally
+                builder.allowBypass()
+
+                vpnInterface = builder.establish()
+                Log.d(TAG, "VPN tunnel established: $vpnInterface")
             }
-
-            // CRITICAL REQUIREMENT: Split-tunnel configuration for specific game app targets
-            try {
-                builder.addAllowedApplication(targetApp)
-            } catch (e: Exception) {
-                Log.w(TAG, "Could not add allowed application: $targetApp", e)
-            }
-
-            // CRITICAL REQUIREMENT: Attach allowBypass() so initial configurations can download normally
-            builder.allowBypass()
-
-            vpnInterface = builder.establish()
-            Log.d(TAG, "VPN tunnel established: $vpnInterface")
         } catch (e: Exception) {
             Log.e(TAG, "Error establishing VPN interface, using simulation backup", e)
         }

@@ -16,6 +16,11 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import android.graphics.Typeface
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import com.gamebooster.pro.databinding.ActivityMainBinding
 
@@ -80,15 +85,78 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        try {
+            super.onCreate(savedInstanceState)
+            
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        setupDropdownMenu()
-        setupClickListeners()
-        loadSavedSettings()
-        measureAllLocationsConcurrently()
+            setupDropdownMenu()
+            setupClickListeners()
+            loadSavedSettings()
+            measureAllLocationsConcurrently()
+        } catch (e: Throwable) {
+            handleCrashGracefully(e)
+        }
+    }
+
+    private fun handleCrashGracefully(e: Throwable) {
+        val sw = java.io.StringWriter()
+        val pw = java.io.PrintWriter(sw)
+        e.printStackTrace(pw)
+        val stackTraceString = sw.toString()
+        
+        android.util.Log.e("MainActivity", "Gracefully handled crash", e)
+        
+        try {
+            val container = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                setBackgroundColor(Color.parseColor("#121212"))
+                setPadding(48, 48, 48, 48)
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            }
+            
+            val title = TextView(this).apply {
+                text = "CORE STACK CRASH CAPTURED"
+                setTextColor(Color.parseColor("#E53935"))
+                textSize = 18f
+                setTypeface(null, Typeface.BOLD)
+                setPadding(0, 0, 0, 16)
+            }
+            container.addView(title)
+            
+            val infoText = TextView(this).apply {
+                text = "The application encountered a layout inflation or component connection error. Please reference the terminal report below:"
+                setTextColor(Color.parseColor("#888888"))
+                textSize = 11f
+                setPadding(0, 0, 0, 16)
+            }
+            container.addView(infoText)
+            
+            val scroll = ScrollView(this).apply {
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    0,
+                    1.0f
+                )
+            }
+            
+            val console = TextView(this).apply {
+                text = stackTraceString
+                setTextColor(Color.parseColor("#00FF66"))
+                textSize = 10f
+                setTypeface(Typeface.MONOSPACE)
+            }
+            scroll.addView(console)
+            container.addView(scroll)
+            
+            setContentView(container)
+        } catch (inner: Throwable) {
+            // Unrecoverable, fallback to default Android crash
+        }
     }
 
     private fun setupDropdownMenu() {
@@ -152,10 +220,14 @@ class MainActivity : ComponentActivity() {
                     "Brazil (BR)" -> java.util.Random().nextInt(135, 150)
                     else -> java.util.Random().nextInt(40, 60)
                 }
-                locationDisplayNames[index] = "${loc.flagEmoji} ${loc.countryName} - $finalPing ms"
-                locationAdapter.notifyDataSetChanged()
+                if (index < locationDisplayNames.size) {
+                    locationDisplayNames[index] = "${loc.flagEmoji} ${loc.countryName} - $finalPing ms"
+                    if (::locationAdapter.isInitialized) {
+                        locationAdapter.notifyDataSetChanged()
+                    }
+                }
                 
-                if (index == currentVirtualLocationIndex && !isBoosterActive) {
+                if (::binding.isInitialized && index == currentVirtualLocationIndex && !isBoosterActive) {
                     binding.textPing.text = finalPing.toString()
                     updateProgressIndicator(finalPing)
                 }
@@ -165,8 +237,10 @@ class MainActivity : ComponentActivity() {
 
     private fun updateTunnelStateBadge() {
         if (isBoosterActive) return
-        binding.textTunnelStateBadge.text = "MEASURING NODE..."
-        binding.textTunnelStateBadge.setTextColor(Color.parseColor("#1A73E8"))
+        if (::binding.isInitialized) {
+            binding.textTunnelStateBadge.text = "MEASURING NODE..."
+            binding.textTunnelStateBadge.setTextColor(Color.parseColor("#1A73E8"))
+        }
         
         val selectedLocation = virtualLocations[currentVirtualLocationIndex]
         ServerPicker.testPing(ServerNode(selectedLocation.countryName, selectedLocation.dnsPrimary, 53)) { pingMs ->
@@ -184,12 +258,14 @@ class MainActivity : ComponentActivity() {
                 "Brazil (BR)" -> java.util.Random().nextInt(135, 150)
                 else -> java.util.Random().nextInt(40, 60)
             }
-            if (!isBoosterActive) {
+            if (::binding.isInitialized && !isBoosterActive) {
                 binding.textPing.text = finalPing.toString()
                 updateProgressIndicator(finalPing)
             }
-            binding.textTunnelStateBadge.text = "BOUND TO ${selectedLocation.countryName.uppercase()}"
-            binding.textTunnelStateBadge.setTextColor(Color.parseColor("#007A33"))
+            if (::binding.isInitialized) {
+                binding.textTunnelStateBadge.text = "BOUND TO ${selectedLocation.countryName.uppercase()}"
+                binding.textTunnelStateBadge.setTextColor(Color.parseColor("#007A33"))
+            }
         }
     }
 

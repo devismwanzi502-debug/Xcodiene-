@@ -64,6 +64,14 @@ class FloatingBubbleService : Service() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate() {
         super.onCreate()
+        
+        // Prevent background manager exception or AppOps warnings if restarted without overlay control permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !android.provider.Settings.canDrawOverlays(this)) {
+            android.util.Log.w("FloatingBubbleService", "Overlay permission not granted. Terminating background HUD service.")
+            stopSelf()
+            return
+        }
+
         isOverlayActive = true
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
