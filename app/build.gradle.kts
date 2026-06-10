@@ -11,7 +11,7 @@ android {
   compileSdk = 36
 
   defaultConfig {
-    applicationId = "com.gamebooster.pro"
+    applicationId = "com.aistudio.gameboosterpro.kxmpzq"
     minSdk = 29
     targetSdk = 34
     versionCode = 1

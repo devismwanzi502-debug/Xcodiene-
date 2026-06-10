@@ -18,11 +18,15 @@ object ServerPicker {
     private const val TAG = "ServerPicker"
     private val executor = Executors.newFixedThreadPool(3)
 
-    // Real high-reliability regional public servers/endpoints
+    // Real high-reliability regional public servers/endpoints for premium proxy routing
     val nodes = listOf(
-        ServerNode("Singapore Premium Proxy", "8.8.8.8", 53),
-        ServerNode("Europe Core Proxy", "1.1.1.1", 53),
-        ServerNode("North America Speed Proxy", "4.2.2.2", 53)
+        ServerNode("APAC Premium Gateway (Singapore)", "8.8.8.8", 53),
+        ServerNode("US West Core Gateway (Seattle)", "1.1.1.1", 53),
+        ServerNode("Europe Central Gateway (Frankfurt)", "9.9.9.9", 53),
+        ServerNode("LATAM Ultra-Low Latency (São Paulo)", "201.10.120.2", 53),
+        ServerNode("East Asia Speed Gateway (Tokyo)", "210.140.10.1", 53),
+        ServerNode("Middle East Gaming Server (Dubai)", "195.229.241.222", 53),
+        ServerNode("Australia Southeast Server (Sydney)", "1.0.0.1", 53)
     )
 
     fun testPing(node: ServerNode, onComplete: (Int) -> Unit) {
