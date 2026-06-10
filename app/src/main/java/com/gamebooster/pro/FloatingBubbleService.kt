@@ -242,11 +242,19 @@ class FloatingBubbleService : Service() {
             stopSelf()
         }
 
-        val filter = IntentFilter(BoosterService.BROADCAST_TELEMETRY)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(telemetryReceiver, filter, Context.RECEIVER_EXPORTED)
-        } else {
-            registerReceiver(telemetryReceiver, filter)
+        try {
+            val filter = IntentFilter(BoosterService.BROADCAST_TELEMETRY)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                try {
+                    registerReceiver(telemetryReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
+                } catch (e: SecurityException) {
+                    registerReceiver(telemetryReceiver, filter, Context.RECEIVER_EXPORTED)
+                }
+            } else {
+                registerReceiver(telemetryReceiver, filter)
+            }
+        } catch (e: Throwable) {
+            android.util.Log.e("FloatingBubbleService", "Failed to register telemetry receiver", e)
         }
     }
 

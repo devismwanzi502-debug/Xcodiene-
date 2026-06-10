@@ -1008,6 +1008,157 @@
             android:orientation="vertical"
             android:visibility="gone">
 
+            <!-- FAST.COM Style Speed Tester -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="INTERNET REAL-TIME SPEED PROBE"
+                    android:textColor="#00FF66"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="12dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="bottom"
+                        android:layout_centerHorizontal="true">
+
+                        <TextView
+                            android:id="@+id/textSpeedTestValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="#FFFFFF"
+                            android:textSize="54sp"
+                            android:fontFamily="sans-serif-thin"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textSpeedTestUnit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mbps"
+                            android:textColor="#888888"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginBottom="10dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressSpeedTest"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:progress="0"
+                    android:max="100"
+                    android:progressTint="#00FF66"
+                    android:progressBackgroundTint="#333333"
+                    android:layout_marginBottom="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LOAD LATENCY"
+                            android:textColor="#888888"
+                            android:textSize="9sp" />
+                        <TextView
+                            android:id="@+id/textSpeedLatency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-- ms"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="UPLOAD"
+                            android:textColor="#888888"
+                            android:textSize="9sp" />
+                        <TextView
+                            android:id="@+id/textSpeedUpload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-- Mbps"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="STATUS"
+                            android:textColor="#888888"
+                            android:textSize="9sp" />
+                        <TextView
+                            android:id="@+id/textSpeedStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="STANDBY"
+                            android:textColor="#1A73E8"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnStartSpeedTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:text="INITIATE SPEED PROBE"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/button_success_bg"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
             <!-- Active Endpoint Diagnostics -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -1224,7 +1375,51 @@
                     android:text="Force IPv6 Dual-Stack Tunnel Bypass"
                     android:textColor="#FFFFFF"
                     android:textSize="13sp"
-                    android:buttonTint="#1A73E8" />
+                    android:buttonTint="#1A73E8"
+                    android:layout_marginBottom="6dp" />
+
+                <!-- All Files Access Controls -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="6dp">
+
+                    <CheckBox
+                        android:id="@+id/switchAllFilesAccess"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="All Files Storage Access"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:clickable="false"
+                        android:buttonTint="#139C5A" />
+
+                    <Button
+                        android:id="@+id/btnRequestAllFiles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="REQUEST"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/button_success_bg"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Samsung A04s 4GB RAM Optimization -->
+                <CheckBox
+                    android:id="@+id/switchSamsungOptimization"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Samsung A04s 4GB RAM Tuning"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:checked="true"
+                    android:buttonTint="#00FF66" />
             </LinearLayout>
 
             <!-- Spinner config parameters -->
@@ -1280,6 +1475,98 @@
                     android:textColor="#FFFFFF"
                     android:background="@drawable/button_primary_bg"
                     android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+            </LinearLayout>
+
+            <!-- Samsung Galaxy A04s Diagnostics Card -->
+            <LinearLayout
+                android:id="@+id/layoutSamsungA04sSpecs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SAMSUNG HARDWARE CO-PILOT TUNING"
+                    android:textColor="#FF9800"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/textSamsungDeviceDetection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DETECTION: Samsung Galaxy A04s"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/textSamsungCpuSpecs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CHIPSET: Exynos 850 (Octa-core 2.0GHz Cortex-A55)"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/textSamsungRamRom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RESOURCES: 4GB RAM | 64GB ROM | Android 13 (API 33)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#33FFFFFF"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BACKGROUND SERVICE PROTECTION GUIDE"
+                    android:textColor="#00FF66"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Samsung One UI Core aggressively terminates background secure VPN tunnels and synth loops on 4GB models. To prevent disconnections during gaming:"
+                    android:textColor="#B0B0B0"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1. Tap the button below to open App Info.\n2. Go to 'Battery' and select 'Unrestricted' (allows high-priority packet processing in background).\n3. Go to Settings -> Device Care -> Memory -> Excluded Apps -> add this app."
+                    android:textColor="#E0E0E0"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="14dp"
+                    android:lineSpacingExtra="3sp" />
+
+                <Button
+                    android:id="@+id/btnOpenSamsungInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:text="OPEN SYSTEM APP SETTINGS"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/button_primary_bg"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

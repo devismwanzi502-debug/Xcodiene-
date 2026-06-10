@@ -149,12 +149,12 @@ class MellySynthEngine {
         }
     }
 
+    private val reusableBuffer = ShortArray(SAMPLE_RATE) // Pre-allocate to prevent continuous GC on budget devices like Samsung A04s
+
     private fun playSynthNote(freq: Float, durationMs: Int) {
-        val totalLength = (SAMPLE_RATE * (durationMs / 1000f)).toInt()
+        val totalLength = (SAMPLE_RATE * (durationMs / 1000f)).toInt().coerceAtMost(reusableBuffer.size)
         if (totalLength <= 0) return
         
-        val shortBuffer = ShortArray(totalLength)
-
         // Synthesize standard rich sine and organ-like harmonics for a professional piano hook
         val twoPi = 2.0 * Math.PI
         val fundamentalRad = twoPi * freq / SAMPLE_RATE
@@ -174,19 +174,19 @@ class MellySynthEngine {
 
             if (freq <= 0f) {
                 // Pause note/rest
-                shortBuffer[i] = 0
+                reusableBuffer[i] = 0
             } else {
                 val wave = sin(fundamentalRad * i) +
                            0.4 * sin(secondHarmonicRad * i) +
                            0.15 * sin(thirdHarmonicRad * i)
                 
-                shortBuffer[i] = (wave * 8000.0 * envelope).toInt().toShort()
+                reusableBuffer[i] = (wave * 8000.0 * envelope).toInt().toShort()
             }
         }
 
         // Write short buffer samples to audio track
         try {
-            audioTrack?.write(shortBuffer, 0, totalLength)
+            audioTrack?.write(reusableBuffer, 0, totalLength)
             
             // Pulse visualizer callback with calculated RMS amplitude
             if (freq > 0f) {
