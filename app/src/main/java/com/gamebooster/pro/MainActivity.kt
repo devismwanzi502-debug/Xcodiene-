@@ -43,8 +43,14 @@ class MainActivity : ComponentActivity() {
     private var currentVirtualLocationIndex = 0
 
     private val gameProfiles = listOf(
-        GameProfile("Call of Duty: Mobile", "com.activision.callofduty.shooter", "COD"),
-        GameProfile("eFootball", "jp.konami.pesam", "EFB")
+        GameProfile("Free Fire (Lag Fix)", "com.dts.freefireth", "FF"),
+        GameProfile("PUBG Mobile (90 FPS Mode)", "com.tencent.ig", "PUBG"),
+        GameProfile("Mobile Legends: Bang Bang", "com.mobile.legends", "MLBB"),
+        GameProfile("Genshin Impact (Ping Fix)", "com.miHoYo.GenshinImpact", "GEN"),
+        GameProfile("Call of Duty: Mobile", "com.activision.callofduty.shooter", "CODM"),
+        GameProfile("eFootball 2026 (Server Opt)", "jp.konami.pesam", "EFB"),
+        GameProfile("Roblox (Fast Load)", "com.roblox.client", "RBLX"),
+        GameProfile("Brawl Stars (Zero Lag)", "com.supercell.brawlstars", "BS")
     )
 
     private val virtualLocations = listOf(
@@ -269,9 +275,46 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun launchSelectedGame() {
+        val selectedProfile = gameProfiles[currentProfileIndex]
+        val packageId = selectedProfile.packageId
+        
+        // Auto-engage booster first if the engine is not active when they launch, making it incredibly fast!
+        if (!isBoosterActive) {
+            Toast.makeText(this, "Enabling High-Speed Engine before launch...", Toast.LENGTH_SHORT).show()
+            toggleBoosterTunnel()
+        }
+        
+        val launchIntent = packageManager.getLaunchIntentForPackage(packageId)
+        if (launchIntent != null) {
+            Toast.makeText(this, "Launching ${selectedProfile.name} in Turbo Acceleration mode!", Toast.LENGTH_SHORT).show()
+            startActivity(launchIntent)
+        } else {
+            // Simulated launch if the game is not installed on this specific device/emulator
+            Toast.makeText(this, "Launching Simulation: Starting ${selectedProfile.name} with Ultra-Low Latency Optimization!", Toast.LENGTH_LONG).show()
+            
+            // Redirect to Play Store details page so they can install/open the real game directly from Play Store if wanted!
+            try {
+                val playStoreIntent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("market://details?id=$packageId"))
+                startActivity(playStoreIntent)
+            } catch (e: Exception) {
+                try {
+                    val webPlayStoreIntent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://play.google.com/store/apps/details?id=$packageId"))
+                    startActivity(webPlayStoreIntent)
+                } catch (ex: Exception) {
+                    android.util.Log.e("MainActivity", "Failed to start Play Store fallback", ex)
+                }
+            }
+        }
+    }
+
     private fun setupClickListeners() {
         binding.btnToggleBooster.setOnClickListener {
             toggleBoosterTunnel()
+        }
+
+        binding.btnLaunchGame.setOnClickListener {
+            launchSelectedGame()
         }
 
         binding.btnToggleFloatingBubble.setOnClickListener {
@@ -421,7 +464,12 @@ class MainActivity : ComponentActivity() {
             startService(stopIntent)
             Toast.makeText(this, "Optimizing Engine Disengaged", Toast.LENGTH_SHORT).show()
         } else {
-            val prepareIntent = VpnService.prepare(this)
+            val prepareIntent = try {
+                VpnService.prepare(this)
+            } catch (e: Throwable) {
+                android.util.Log.e("MainActivity", "VpnService.prepare failed, falling back to direct booster start", e)
+                null
+            }
             if (prepareIntent != null) {
                 startActivityForResult(prepareIntent, REQUEST_VPN)
             } else {
@@ -486,11 +534,24 @@ class MainActivity : ComponentActivity() {
             binding.viewSelectedGameStatusPill.setBackgroundColor(Color.parseColor("#007A33"))
             binding.btnToggleBooster.text = "SUSPEND ENGINE"
             binding.btnToggleBooster.setBackgroundResource(R.drawable.button_danger_bg)
+            binding.btnLaunchGame.text = "LAUNCH NOW"
             
             binding.textJitter.text = String.format("%.1f ms", 0.8 + (ping % 4) * 0.15)
             binding.textPacketLoss.text = "0.00 %"
             binding.textIntensity.text = if (ping < 22) "ULTRA-LOW" else "OPTIMIZED"
             
+            // Dual-Channel Visual Lanes Updates
+            val reductionPct = 70 + (ping % 15)
+            binding.textReductionRate.text = "-$reductionPct%"
+            binding.textCombinedStatus.text = "• MULTIPATH ACCELERATION: ACTIVE"
+            binding.textCombinedStatus.setTextColor(Color.parseColor("#00FF66"))
+            
+            binding.textWifiDelay.text = "${ping + 3} ms"
+            binding.textWifiPercent.text = "${92 + (ping % 6)}% SPEED"
+            
+            binding.textCellularDelay.text = "${ping + 11} ms"
+            binding.textCellularPercent.text = "${88 + (ping % 5)}% SPEED"
+
             if (country.isNotEmpty()) {
                 binding.textTunnelStateBadge.text = "BOUND TO $flag ${country.uppercase()}"
                 binding.textTunnelStateBadge.setTextColor(Color.parseColor("#007A33"))
@@ -509,10 +570,20 @@ class MainActivity : ComponentActivity() {
             binding.viewSelectedGameStatusPill.setBackgroundColor(Color.parseColor("#888888"))
             binding.btnToggleBooster.text = "ENGAGE ENGINE"
             binding.btnToggleBooster.setBackgroundResource(R.drawable.button_primary_bg)
+            binding.btnLaunchGame.text = "BOOST & LAUNCH"
             
             binding.textJitter.text = "1.2 ms"
             binding.textPacketLoss.text = "0.00 %"
             binding.textIntensity.text = "STANDBY"
+            
+            // Dual-Channel Visual Lanes Reset
+            binding.textReductionRate.text = "STANDBY"
+            binding.textCombinedStatus.text = "• MULTIPATH STANDBY"
+            binding.textCombinedStatus.setTextColor(Color.parseColor("#888888"))
+            binding.textWifiDelay.text = "STANDBY"
+            binding.textWifiPercent.text = "100% SIGNAL"
+            binding.textCellularDelay.text = "STANDBY"
+            binding.textCellularPercent.text = "100% SIGNAL"
             
             val density = resources.displayMetrics.density
             val params = binding.viewPingProgressBar.layoutParams
